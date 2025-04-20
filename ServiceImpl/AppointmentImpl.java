@@ -2,13 +2,23 @@ package com.basicProject.HospitalManagment.Servises.ServiceImpl;
 
 import com.basicProject.HospitalManagment.Dto.AppointmentDto;
 import com.basicProject.HospitalManagment.Entity.Appointment;
+import com.basicProject.HospitalManagment.Repositories.AppointmentRepo;
 import com.basicProject.HospitalManagment.Servises.AppointmentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AppointmentImpl implements AppointmentService {
+
+    @Autowired
+    private AppointmentRepo appointmentRepo;
+
     @Override
     public AppointmentDto createPatient(AppointmentDto appointmentDto) {
+
+
         return null;
     }
 

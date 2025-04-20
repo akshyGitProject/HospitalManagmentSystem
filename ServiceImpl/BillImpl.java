@@ -2,11 +2,19 @@ package com.basicProject.HospitalManagment.Servises.ServiceImpl;
 
 import com.basicProject.HospitalManagment.Dto.BillDto;
 import com.basicProject.HospitalManagment.Entity.Bill;
+import com.basicProject.HospitalManagment.Repositories.BillRepo;
 import com.basicProject.HospitalManagment.Servises.BillService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class BillImpl implements BillService {
+
+    @Autowired
+    private BillRepo billRepo;
+
     @Override
     public BillDto createPatient(BillDto billDto) {
         return null;

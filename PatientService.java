@@ -8,11 +8,11 @@ public interface PatientService {
 
     PatientDto createPatient(PatientDto patientDto);
 
-    void getPatientById(int patientId);
+    PatientDto  getPatientById(Long patientId);
 
-    PatientDto updatePatient(PatientDto patientDto,int patientId);
+    PatientDto updatePatient(PatientDto patientDto,Long patientId);
 
-    PatientDto deletePatient(int patientId);
+    PatientDto deletePatient(Long patientId);
 
     List<PatientDto> getAllPatient();
 

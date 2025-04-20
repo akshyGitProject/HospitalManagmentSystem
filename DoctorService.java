@@ -9,11 +9,11 @@ public interface DoctorService {
 
     DoctorDto createPatient(DoctorDto doctorDto);
 
-    void getPatientById(int doctorId);
+    DoctorDto getPatientById(Long doctorId);
 
-    DoctorDto updatePatient(DoctorDto doctorDto,int doctorId);
+    DoctorDto updatePatient(DoctorDto doctorDto,Long doctorId);
 
-    DoctorDto deletePatient(int doctorId);
+    DoctorDto deletePatient(Long doctorId);
 
     List<DoctorDto> getAllPatient();
 }
