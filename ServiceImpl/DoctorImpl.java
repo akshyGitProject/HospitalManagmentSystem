@@ -1,6 +1,7 @@
 package com.basicProject.HospitalManagment.Servises.ServiceImpl;
 
 import com.basicProject.HospitalManagment.Dto.DoctorDto;
+import com.basicProject.HospitalManagment.Entity.Doctor;
 import com.basicProject.HospitalManagment.Servises.DoctorService;
 
 import java.util.List;
@@ -30,4 +31,30 @@ public class DoctorImpl implements DoctorService {
     public List<DoctorDto> getAllPatient() {
         return List.of();
     }
+
+    public DoctorDto doctorToDto(Doctor doctor){
+
+        DoctorDto doctorDto=new DoctorDto();
+        doctorDto.setName(doctor.getName());
+        doctorDto.setAge(doctor.getAge());
+        doctorDto.setId(doctor.getId());
+        doctorDto.setSpeciality(doctor.getSpeciality());
+
+        return doctorDto;
+
+    }
+
+
+    public Doctor dtoToEntity(DoctorDto doctorDto){
+
+        Doctor doctor=new Doctor();
+        doctor.setName(doctorDto.getName());
+        doctor.setAge(doctorDto.getAge());
+        doctor.setId(doctorDto.getId());
+        doctor.setSpeciality(doctorDto.getSpeciality());
+
+        return doctor;
+
+    }
+
 }

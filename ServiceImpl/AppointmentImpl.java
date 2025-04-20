@@ -1,6 +1,7 @@
 package com.basicProject.HospitalManagment.Servises.ServiceImpl;
 
 import com.basicProject.HospitalManagment.Dto.AppointmentDto;
+import com.basicProject.HospitalManagment.Entity.Appointment;
 import com.basicProject.HospitalManagment.Servises.AppointmentService;
 
 import java.util.List;
@@ -30,4 +31,30 @@ public class AppointmentImpl implements AppointmentService {
     public List<AppointmentDto> getAllPatient() {
         return List.of();
     }
+
+ public AppointmentDto appointmentToDto(Appointment appointment){
+
+     AppointmentDto appointmentDto=new AppointmentDto();
+     appointmentDto.setId(appointment.getId());
+     appointmentDto.setDate(appointment.getDate());
+     appointmentDto.setDoctorId(appointment.getId());
+     appointmentDto.setPatientId(appointment.getId());
+
+     return appointmentDto;
+
+ }
+
+    public Appointment appointmentToDto(AppointmentDto appointmentDto){
+
+        Appointment appointment=new Appointment();
+        appointment.setId(appointmentDto.getId());
+        appointment.setDate(appointmentDto.getDate());
+        appointment.setDoctorId(appointmentDto.getId());
+        appointment.setPatientId(appointmentDto.getId());
+
+        return appointment;
+
+    }
+
+
 }
