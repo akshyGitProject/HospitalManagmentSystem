@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface BillService {
 
-    BillDto createPatient(BillDto billDto);
+    BillDto createBill(BillDto billDto);
 
-    void getPatientById(int billId);
+    BillDto getBillById(Long billId);
 
-    BillDto updatePatient(BillDto billDto,int billId);
+    BillDto updateBill(BillDto billDto,Long billId);
 
-    BillDto deletePatient(int billId);
+    BillDto deleteBill(Long billId);
 
-    List<BillDto> getAllPatient();
+    List<BillDto> getAllBill();
 }

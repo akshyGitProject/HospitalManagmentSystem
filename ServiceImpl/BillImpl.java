@@ -2,6 +2,7 @@ package com.basicProject.HospitalManagment.Servises.ServiceImpl;
 
 import com.basicProject.HospitalManagment.Dto.BillDto;
 import com.basicProject.HospitalManagment.Entity.Bill;
+import com.basicProject.HospitalManagment.Exception.ResourceNotFoundException;
 import com.basicProject.HospitalManagment.Repositories.BillRepo;
 import com.basicProject.HospitalManagment.Servises.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,27 +17,48 @@ public class BillImpl implements BillService {
     private BillRepo billRepo;
 
     @Override
-    public BillDto createPatient(BillDto billDto) {
-        return null;
+    public BillDto createBill(BillDto billDto) {
+
+        Bill bill=dtoToEntity(billDto);
+
+        Bill save = billRepo.save(bill);
+
+        return billToDto(save);
     }
 
     @Override
-    public void getPatientById(int billId) {
+    public BillDto getBillById(Long billId) {
 
+        Bill bill=this.billRepo.findById(billId).orElseThrow(()->new ResourceNotFoundException("Bill","billId",billId));
+
+    return billToDto(bill);
     }
 
     @Override
-    public BillDto updatePatient(BillDto billDto, int billId) {
-        return null;
+    public BillDto updateBill(BillDto billDto, Long billId) {
+        Bill bill=billRepo.findById(billId).orElseThrow(
+                ()->new ResourceNotFoundException("Bill","billId",billId));
+
+        bill.setAmount(billDto.getAmount());
+        bill.setPatientId(billDto.getPatientId());
+        bill.setStatus(billDto.getStatus());
+
+        return billToDto(bill);
     }
 
     @Override
-    public BillDto deletePatient(int billId) {
-        return null;
+    public BillDto deleteBill(Long billId) {
+
+        Bill bill=billRepo.findById(billId).orElseThrow(
+                ()->new ResourceNotFoundException("Bill","billId",billId));
+
+        billRepo.delete(bill);
+
+        return billToDto(bill);
     }
 
     @Override
-    public List<BillDto> getAllPatient() {
+    public List<BillDto> getAllBill() {
         return List.of();
     }
 
@@ -52,7 +74,7 @@ public class BillImpl implements BillService {
 
     }
 
-    public Bill billToDto(BillDto billDto){
+    public Bill dtoToEntity(BillDto billDto){
 
         Bill bill=new Bill();
         bill.setId(billDto.getId());

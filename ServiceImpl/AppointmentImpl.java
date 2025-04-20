@@ -18,7 +18,6 @@ public class AppointmentImpl implements AppointmentService {
     @Override
     public AppointmentDto createPatient(AppointmentDto appointmentDto) {
 
-
         return null;
     }
 
