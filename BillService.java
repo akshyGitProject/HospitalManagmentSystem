@@ -1,7 +1,6 @@
 package com.basicProject.HospitalManagment.Servises;
 
 import com.basicProject.HospitalManagment.Dto.BillDto;
-import com.basicProject.HospitalManagment.Dto.DoctorDto;
 
 import java.util.List;
 

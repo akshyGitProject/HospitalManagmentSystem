@@ -2,11 +2,13 @@ package com.basicProject.HospitalManagment.Servises.ServiceImpl;
 
 import com.basicProject.HospitalManagment.Dto.AppointmentDto;
 import com.basicProject.HospitalManagment.Entity.Appointment;
+import com.basicProject.HospitalManagment.Exception.ResourceNotFoundException;
 import com.basicProject.HospitalManagment.Repositories.AppointmentRepo;
 import com.basicProject.HospitalManagment.Servises.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,28 +19,56 @@ public class AppointmentImpl implements AppointmentService {
 
     @Override
     public AppointmentDto createPatient(AppointmentDto appointmentDto) {
+        Appointment appointment=dtoToEntity(appointmentDto);
 
-        return null;
+        Appointment saved = appointmentRepo.save(appointment);
+
+        return appointmentToDto(saved);
     }
 
     @Override
-    public void getPatientById(int appointmentId) {
+    public AppointmentDto getPatientById(Long appointmentId) {
 
+        Appointment appointment = appointmentRepo.findById(appointmentId).orElseThrow(
+                () -> new ResourceNotFoundException("Appointment", "appointmentId", appointmentId));
+
+        return appointmentToDto(appointment);
     }
 
     @Override
-    public AppointmentDto updatePatient(AppointmentDto appointmentDto, int appointmentId) {
-        return null;
+    public AppointmentDto updatePatient(AppointmentDto appointmentDto, Long appointmentId) {
+        Appointment appointment=appointmentRepo.findById(appointmentId).orElseThrow(
+                () -> new ResourceNotFoundException("Appointment", "appointmentId", appointmentId));
+        appointment.setDate(appointmentDto.getDate());
+        appointment.setPatientId(appointmentDto.getPatientId());
+        appointment.setDoctorId(appointmentDto.getDoctorId());
+
+        return appointmentToDto(appointment);
     }
 
     @Override
-    public AppointmentDto deletePatient(int appointmentId) {
-        return null;
+    public AppointmentDto deletePatient(Long appointmentId) {
+        Appointment appointment = appointmentRepo.findById(appointmentId).orElseThrow(
+                () -> new ResourceNotFoundException("Appointment", "appointmentId", appointmentId));
+
+        appointmentRepo.delete(appointment);
+
+        return appointmentToDto(appointment);
     }
 
     @Override
     public List<AppointmentDto> getAllPatient() {
-        return List.of();
+        List<Appointment> appointments=appointmentRepo.findAll();
+        List<AppointmentDto> appointmentDtos=new ArrayList<>();
+
+        for(Appointment appointment:appointments){
+
+            AppointmentDto appointmentDto=appointmentToDto(appointment);
+            appointmentDtos.add(appointmentDto);
+
+        }
+
+        return appointmentDtos;
     }
 
  public AppointmentDto appointmentToDto(Appointment appointment){
@@ -53,7 +83,7 @@ public class AppointmentImpl implements AppointmentService {
 
  }
 
-    public Appointment appointmentToDto(AppointmentDto appointmentDto){
+    public Appointment dtoToEntity(AppointmentDto appointmentDto){
 
         Appointment appointment=new Appointment();
         appointment.setId(appointmentDto.getId());

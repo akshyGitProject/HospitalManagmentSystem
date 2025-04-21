@@ -8,6 +8,7 @@ import com.basicProject.HospitalManagment.Servises.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,7 +60,16 @@ public class BillImpl implements BillService {
 
     @Override
     public List<BillDto> getAllBill() {
-        return List.of();
+
+        List<Bill> bills=billRepo.findAll();
+        List<BillDto> billDtos=new ArrayList<>();
+
+        for(Bill bill:bills){
+            BillDto billDto=billToDto(bill);
+            billDtos.add(billDto);
+        }
+
+        return billDtos;
     }
 
     public BillDto billToDto(Bill bill){

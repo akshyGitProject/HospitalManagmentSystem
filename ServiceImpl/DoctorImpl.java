@@ -52,7 +52,7 @@ public class DoctorImpl implements DoctorService {
 
         doctorRepo.delete(doctor);
 
-        return null;
+        return doctorToDto(doctor);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class DoctorImpl implements DoctorService {
             doctorDtos.add(doctorDto);
         }
 
-        return List.of();
+        return doctorDtos;
     }
 
     public DoctorDto doctorToDto(Doctor doctor){

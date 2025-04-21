@@ -9,11 +9,11 @@ public interface AppointmentService {
 
     AppointmentDto createPatient(AppointmentDto appointmentDto);
 
-    void getPatientById(int appointmentId);
+    AppointmentDto getPatientById(Long appointmentId);
 
-    AppointmentDto updatePatient(AppointmentDto appointmentDto,int appointmentId);
+    AppointmentDto updatePatient(AppointmentDto appointmentDto,Long appointmentId);
 
-    AppointmentDto deletePatient(int appointmentId);
+    AppointmentDto deletePatient(Long appointmentId);
 
     List<AppointmentDto> getAllPatient();
 }
