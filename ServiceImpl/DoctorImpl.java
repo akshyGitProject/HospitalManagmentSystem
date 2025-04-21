@@ -18,7 +18,7 @@ public class DoctorImpl implements DoctorService {
     private DoctorRepo doctorRepo;
 
     @Override
-    public DoctorDto createPatient(DoctorDto doctorDto) {
+    public DoctorDto createDoctor(DoctorDto doctorDto) {
         Doctor doctor=this.dtoToEntity(doctorDto);
 
         Doctor save = doctorRepo.save(doctor);
@@ -27,7 +27,7 @@ public class DoctorImpl implements DoctorService {
     }
 
     @Override
-    public DoctorDto getPatientById(Long doctorId) {
+    public DoctorDto getDoctorById(Long doctorId) {
         Doctor doctor=this.doctorRepo.findById(doctorId).orElseThrow(
                 ()->new ResourceNotFoundException("Doctor","DoctorId",doctorId));
 
@@ -35,7 +35,7 @@ public class DoctorImpl implements DoctorService {
     }
 
     @Override
-    public DoctorDto updatePatient(DoctorDto doctorDto, Long doctorId) {
+    public DoctorDto updateDoctor(DoctorDto doctorDto, Long doctorId) {
         Doctor doctor=this.doctorRepo.findById(doctorId).orElseThrow(
                 ()->new ResourceNotFoundException("Doctor","doctorId",doctorId));
         doctor.setAge(doctorDto.getAge());
@@ -46,7 +46,7 @@ public class DoctorImpl implements DoctorService {
     }
 
     @Override
-    public DoctorDto deletePatient(Long doctorId) {
+    public DoctorDto deleteDoctor(Long doctorId) {
         Doctor doctor=this.doctorRepo.findById(doctorId).orElseThrow(
                 ()->new ResourceNotFoundException("Doctor","doctorId",doctorId));
 
@@ -56,7 +56,7 @@ public class DoctorImpl implements DoctorService {
     }
 
     @Override
-    public List<DoctorDto> getAllPatient() {
+    public List<DoctorDto> getAllDoctor() {
         List<Doctor> doctors=doctorRepo.findAll();
 
         List<DoctorDto> doctorDtos=new ArrayList<>();

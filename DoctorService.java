@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface DoctorService {
 
-    DoctorDto createPatient(DoctorDto doctorDto);
+    DoctorDto createDoctor(DoctorDto doctorDto);
 
-    DoctorDto getPatientById(Long doctorId);
+    DoctorDto getDoctorById(Long doctorId);
 
-    DoctorDto updatePatient(DoctorDto doctorDto,Long doctorId);
+    DoctorDto updateDoctor(DoctorDto doctorDto,Long doctorId);
 
-    DoctorDto deletePatient(Long doctorId);
+    DoctorDto deleteDoctor(Long doctorId);
 
-    List<DoctorDto> getAllPatient();
+    List<DoctorDto> getAllDoctor();
 }
