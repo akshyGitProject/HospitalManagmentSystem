@@ -18,7 +18,7 @@ public class AppointmentImpl implements AppointmentService {
     private AppointmentRepo appointmentRepo;
 
     @Override
-    public AppointmentDto createPatient(AppointmentDto appointmentDto) {
+    public AppointmentDto createAppointment(AppointmentDto appointmentDto) {
         Appointment appointment=dtoToEntity(appointmentDto);
 
         Appointment saved = appointmentRepo.save(appointment);
@@ -27,7 +27,7 @@ public class AppointmentImpl implements AppointmentService {
     }
 
     @Override
-    public AppointmentDto getPatientById(Long appointmentId) {
+    public AppointmentDto getAppointmentById(Long appointmentId) {
 
         Appointment appointment = appointmentRepo.findById(appointmentId).orElseThrow(
                 () -> new ResourceNotFoundException("Appointment", "appointmentId", appointmentId));
@@ -36,7 +36,7 @@ public class AppointmentImpl implements AppointmentService {
     }
 
     @Override
-    public AppointmentDto updatePatient(AppointmentDto appointmentDto, Long appointmentId) {
+    public AppointmentDto updateAppointment(AppointmentDto appointmentDto, Long appointmentId) {
         Appointment appointment=appointmentRepo.findById(appointmentId).orElseThrow(
                 () -> new ResourceNotFoundException("Appointment", "appointmentId", appointmentId));
         appointment.setDate(appointmentDto.getDate());
@@ -47,7 +47,7 @@ public class AppointmentImpl implements AppointmentService {
     }
 
     @Override
-    public AppointmentDto deletePatient(Long appointmentId) {
+    public AppointmentDto deleteAppointment(Long appointmentId) {
         Appointment appointment = appointmentRepo.findById(appointmentId).orElseThrow(
                 () -> new ResourceNotFoundException("Appointment", "appointmentId", appointmentId));
 
@@ -57,7 +57,7 @@ public class AppointmentImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentDto> getAllPatient() {
+    public List<AppointmentDto> getAllAppointment() {
         List<Appointment> appointments=appointmentRepo.findAll();
         List<AppointmentDto> appointmentDtos=new ArrayList<>();
 
