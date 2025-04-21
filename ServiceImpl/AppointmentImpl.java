@@ -37,13 +37,19 @@ public class AppointmentImpl implements AppointmentService {
 
     @Override
     public AppointmentDto updateAppointment(AppointmentDto appointmentDto, Long appointmentId) {
-        Appointment appointment=appointmentRepo.findById(appointmentId).orElseThrow(
+        Appointment appointment = appointmentRepo.findById(appointmentId).orElseThrow(
                 () -> new ResourceNotFoundException("Appointment", "appointmentId", appointmentId));
+
+        // Update the fields
         appointment.setDate(appointmentDto.getDate());
         appointment.setPatientId(appointmentDto.getPatientId());
         appointment.setDoctorId(appointmentDto.getDoctorId());
 
-        return appointmentToDto(appointment);
+        // Save the updated appointment
+        Appointment updatedAppointment = appointmentRepo.save(appointment);
+
+        // Return the updated AppointmentDto
+        return appointmentToDto(updatedAppointment);
     }
 
     @Override
@@ -76,8 +82,8 @@ public class AppointmentImpl implements AppointmentService {
      AppointmentDto appointmentDto=new AppointmentDto();
      appointmentDto.setId(appointment.getId());
      appointmentDto.setDate(appointment.getDate());
-     appointmentDto.setDoctorId(appointment.getId());
-     appointmentDto.setPatientId(appointment.getId());
+     appointmentDto.setDoctorId(appointment.getDoctorId());
+     appointmentDto.setPatientId(appointment.getPatientId());
 
      return appointmentDto;
 
@@ -88,8 +94,8 @@ public class AppointmentImpl implements AppointmentService {
         Appointment appointment=new Appointment();
         appointment.setId(appointmentDto.getId());
         appointment.setDate(appointmentDto.getDate());
-        appointment.setDoctorId(appointmentDto.getId());
-        appointment.setPatientId(appointmentDto.getId());
+        appointment.setDoctorId(appointmentDto.getDoctorId());
+        appointment.setPatientId(appointmentDto.getPatientId());
 
         return appointment;
 
